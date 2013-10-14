@@ -1,4 +1,0 @@
-0.9
-- fix bug with subcollections
-- link collections and sets default images
-- set display_errors to Off

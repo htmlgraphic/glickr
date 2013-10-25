@@ -359,18 +359,24 @@ class Gallery extends Phatso {
 	 */
 	
 	function __getResult($params) {
-		$params['format'] = 'php_serial';
+		$params['format'] = 'json';
 		$params['api_key'] = $this->api_key;
 		
 		$encoded_params = array();
 		foreach ($params as $k => $v){
 			$encoded_params[] = urlencode($k).'='.urlencode($v);
 		}
-		
-		$rsp = @file_get_contents($this->api_url.'?'.implode('&', $encoded_params));
-		$rsp_obj = unserialize($rsp);
 
-		if(!$rsp_obj['stat']=='ok') {
+		$rsp = @file_get_contents($this->api_url.'?'.implode('&', $encoded_params));
+        $data = str_replace( 'jsonFlickrApi(', '', $rsp ); // strip out returned built in javascript function
+        $data = substr( $data, 0, strlen( $data ) - 1 ); //strip out last paren
+		$rsp_obj = json_decode($data);
+
+		echo $rsp_obj->stat;
+        print_r($rsp_obj);
+        die;		
+
+		if(!$rsp_obj->stat=='ok') {
 			switch($rsp_obj['code']) {
 				case '100':
 					$msg = 'Invalid API key.';

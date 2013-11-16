@@ -15,10 +15,13 @@ php:
   # aliased to a recent 5.5.x version
   - 5.5
 
-email: false
+# omitting "script:" will default to phpunit
+# use the $DB env variable to determine the phpunit.xml to use
+script: phpunit --configuration phpunit.xml --coverage-text
+
 
 # optionally specify a list of environments, for example to test different RDBMS
 env:
   - DB=mysql
 
-
+email: false

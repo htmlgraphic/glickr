@@ -15,14 +15,10 @@ php:
   # aliased to a recent 5.5.x version
   - 5.5
 
-before_script:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install
-
+email: false
 
 # optionally specify a list of environments, for example to test different RDBMS
 env:
   - DB=mysql
 
 
-email: false

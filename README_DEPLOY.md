@@ -3,8 +3,8 @@
 ---
 
 ## Setup
-    pip install fabric
-    vagrant up <instance>
+    pip install fabric (install homebrew)
+    vagrant up
     fab tempdev get_database
     fab dev bootstrap
 

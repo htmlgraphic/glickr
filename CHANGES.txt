@@ -1,2 +1,6 @@
+0.9
+- fix bug with subcollections
+- link collections and sets default images
+- set display_errors to Off
 - Added link to open the photos in flickr.com
 - Automatic rebuildCache feature added

@@ -60,7 +60,7 @@ def config_templates():
     "apache": {
         "local_path": "conf/vhosts.conf",
         "remote_directory": "/etc/apache2/sites-available/",
-        "remote_path": "/etc/apache2/sites-available/%s.conf" % env.project_name,
+        "remote_path": "/etc/apache2/sites-available/%s" % env.domain,
     },
     "php": {
         "local_path": "conf/php.ini",
@@ -257,7 +257,7 @@ def deploy():
         
     #make sure correct apache symlinks are created
     #and proper deploy config is loaded
-    sudo('a2ensite %s' % env.project_name)
+    sudo('a2ensite %s' % env.domain)
 
     #disable the default website
     sudo('a2dissite default')
@@ -419,10 +419,8 @@ def mysql_create_database(db_user, db_password, db_name):
 
     run('mysqladmin -u %s -p%s create %s' % (db_user, db_password, db_name))
 
-
 def _mysql_create_database(db_user, db_password, db_name):
     sql = "USE '%s'" % db_name
-    mysql_execute(sql)
     with settings(hide('warnings', 'running', 'stdout', 'stderr'), warn_only=True):
         result = mysql_execute(sql, 'root')
     return result.succeeded
